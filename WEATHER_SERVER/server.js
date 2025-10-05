@@ -37,8 +37,18 @@ app.get("/weather/:city", async (req, res) => {
       temperature: `${data.main.temp} °C`,
       condition: data.weather[0].description,
     });
-  } catch (error) {
-    res.status(404).json({ error: "City not found or API error"});
+ } catch (error) {
+    console.error("API call failed:", error); // <-- Add this line
+    if (error.response) {
+      // The API returned a response, but it was not successful (e.g., 404)
+      res.status(error.response.status).json({
+        error: "City not found or API error",
+        message: error.response.data.message
+      });
+    } else {
+      // The request did not receive a response from the API
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 });
 
