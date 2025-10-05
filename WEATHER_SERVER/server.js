@@ -12,6 +12,8 @@ app.use(morgan("dev"));
 // API key & base URL (OpenWeatherMap free API)
 const API_KEY = "9026b6550786bd02bb4043460c5c18d5"; // Get free from openweathermap.org
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+const FORCUST_URL = "https://api.openweathermap.org/data/2.5/forcust
+const COORDS_URL = "https://api.openweathermap.org/geo/1.0/coords
 
 // Route: home
 app.get("/", (req, res) => {
