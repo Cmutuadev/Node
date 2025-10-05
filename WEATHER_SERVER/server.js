@@ -2,14 +2,15 @@
 const express = require("express");
 const morgan = require("morgan");
 const axios = require("axios");
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(morgan("dev"));
 
 // API key & base URL (OpenWeatherMap free API)
-const API_KEY = "api_key_here"; // Get free from openweathermap.org
+const API_KEY = "9026b6550786bd02bb4043460c5c18d5"; // Get free from openweathermap.org
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
 // Route: home
@@ -37,16 +38,7 @@ app.get("/weather/:city", async (req, res) => {
       condition: data.weather[0].description,
     });
   } catch (error) {
-    if (error.response) {
-      // The API returned a response, but it was not successful (e.g., 404)
-      res.status(error.response.status).json({
-        error: "City not found or API error",
-        message: error.response.data.message
-      });
-    } else {
-      // The request did not receive a response from the API
-      res.status(500).json({ error: "Internal server error" });
-    }
+    res.status(404).json({ error: "City not found or API error"});
   }
 });
 
