@@ -38,7 +38,7 @@ app.get("/weather/:city", async (req, res) => {
       condition: data.weather[0].description,
     });
  } catch (error) {
-    console.error("API call failed:", error); // <-- Add this line
+    console.error("API call failed:", error); //
     if (error.response) {
       // The API returned a response, but it was not successful (e.g., 404)
       res.status(error.response.status).json({
